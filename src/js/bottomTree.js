@@ -10,7 +10,7 @@ export class BottomTree extends Actor {
             collisionType: CollisionType.Fixed  // Changed from Passive to Fixed
         });
         this.speed = 200; // Initial speed of the tree
-        this.acceleration = 20; // Rate at which the speed increases
+        this.acceleration = 20; // Speed increase per second
     }
 
     onInitialize(engine) {
