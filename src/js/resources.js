@@ -6,7 +6,6 @@ import { EndScene } from './endScene'
 // voeg hier jouw eigen resources toe
 const Resources = {
     Background: new ImageSource('images/background.png', { wrapping: ImageWrapping.Repeat}), 
-    // Background: new ImageSource('images/background.png'),
     StartScreen: new ImageSource ('images/startScreen.png'),
     EndScene: new ImageSource ('images/endScene.png'),
     Coin: new ImageSource('images/coin.png'),
@@ -31,8 +30,7 @@ const ResourceLoader = new Loader([
     Resources.Bullet,
     Resources.StartScreen,
     Resources.EndScene
-    // Resources.TestScreen
-    // Resources.Obstacles,
+
 ])
 
 export { Resources, ResourceLoader }

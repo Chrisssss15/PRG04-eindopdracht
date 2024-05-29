@@ -1,30 +1,3 @@
-// import { Actor, Color, Font, Label, Vector } from "excalibur";
-
-// export class UI extends Actor{
-//     score;
-
-//     updateScore(score){
-//         this.score.text = `Score: ${score}`;
-//     }
-
-//     onInitialize(engine){
-//         this.score = new Label({
-//             text: "Score: 0",
-//             pos: new Vector(200, 200),
-//             // color: Color.White,
-//             font: new Font({
-//                 size: 30,
-//                 family: 'Arial',
-                
-//             })
-//         });
-
-//         engine.add(this.score);
-//     }
-// }
-
-
-
 import { Actor, Color, Font, Label, Vector } from "excalibur";
 
 export class UI extends Actor {
