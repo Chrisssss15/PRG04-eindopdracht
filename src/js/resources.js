@@ -1,12 +1,21 @@
-import { ImageSource, Sound, Resource, Loader } from 'excalibur'
-import { Fish } from './fish'
-import { Yoshi } from './yoshi'
+import { ImageSource, Sound, Resource, Loader, ImageWrapping } from 'excalibur'
+import { Monkey } from './monkey'
+import { Bullet } from './bullet'
+import { EndScene } from './endScene'
 
 // voeg hier jouw eigen resources toe
 const Resources = {
-    Car: new ImageSource('images/car.png'),
-    Fish: new ImageSource('images/fish.png'),
-    Yoshi: new ImageSource('images/yoshi.png'),
+    Background: new ImageSource('images/background.png', { wrapping: ImageWrapping.Repeat}), 
+    // Background: new ImageSource('images/background.png'),
+    StartScreen: new ImageSource ('images/startScreen.png'),
+    EndScene: new ImageSource ('images/endScene.png'),
+    Coin: new ImageSource('images/coin.png'),
+    Monkey: new ImageSource('images/FlyingMonkey.png'),
+    BottomTree: new ImageSource('images/bottomTree.png'),
+    TopTree: new ImageSource('images/topTree.png'),
+    Bullet: new ImageSource('images/bullet.png'),
+
+
 }
 
 
@@ -14,9 +23,16 @@ const Resources = {
 
 
 const ResourceLoader = new Loader([
-    Resources.Car,
-    Resources.Fish,
-    Resources.Yoshi
+    Resources.Monkey,
+    Resources.Background,
+    Resources.BottomTree,
+    Resources.TopTree,
+    Resources.Coin,
+    Resources.Bullet,
+    Resources.StartScreen,
+    Resources.EndScene
+    // Resources.TestScreen
+    // Resources.Obstacles,
 ])
 
 export { Resources, ResourceLoader }
