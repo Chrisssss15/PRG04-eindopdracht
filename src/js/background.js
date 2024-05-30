@@ -1,27 +1,61 @@
-import { Actor, Sprite, Vector } from "excalibur";
+import { Actor, Scene, Sprite, Vector } from "excalibur";
 import { Resources } from "./resources";
+import { Monkey } from "./monkey";
+import { Obstacles } from "./obstacles";
+import { UI } from "./ui";
+import { Coin } from "./coin";
 
-export class Background extends Actor {
-    sprite;
+export class GameScene extends Scene {
+    constructor(game) {
+        super();
+        this.game = game;
+    }
 
     onInitialize(engine) {
-        this.sprite = new Sprite({
-            image: Resources.Background
-        });
-
-        this.anchor = Vector.Zero;
-        this.graphics.use(this.sprite);
-
-        // Verklein de afbeelding om het effect van uitzoomen te geven
-        this.sprite.scale = new Vector(0.75, 0.75); // Vervang 0.5 door de gewenste schaalfactor
+        this.createBackground(engine);
+        this.runGame(engine);
     }
 
-    onPostUpdate(engine, delta) {
-        const backgroundWidth = this.sprite.drawWidth * this.sprite.scale.x;
-        // Als de afbeelding buiten het zicht gaat, reset dan de x-positie
-        if (this.sprite.sourceView.x >= backgroundWidth) {
-            this.sprite.sourceView.x = -this.sprite.drawWidth;
+    createBackground(engine) { //maakt de achtergrond aan
+        const sprite = new Sprite({ image: Resources.Background });
+        const actor = new Actor({ pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2) });
+        actor.graphics.use(sprite);
+        actor.scale = new Vector(0.75, 0.75);
+        this.add(actor);
+    }
+
+    runGame(engine) {
+        console.log("Game is running");
+
+        const monkey = new Monkey(this.game);
+        engine.add(monkey);
+
+        const obstacles = new Obstacles();
+        engine.add(obstacles);
+
+        this.addCoin(engine);
+
+        this.game.ui = new UI();
+        engine.add(this.game.ui);
+    }
+
+    addPoints() {
+        if (this.game.ui) {
+            this.game.ui.updateScore();
         }
-        this.sprite.sourceView.x += 1 * delta;
     }
+
+    addCoin(engine) {
+        const coin = new Coin(this);
+        engine.add(coin);
+    }
+
+    // endGame(engine) {
+    //     // console.log("Ending game and saving score...");
+    //     this.game.saveGameData();
+
+    //     // Huidige score doorgeven aan EndScene
+    //     const currentScore = this.game.ui ? this.game.ui.coins : 0;
+    //     engine.goToScene('endScene', { data: { currentScore } });
+    // }
 }

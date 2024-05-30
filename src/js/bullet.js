@@ -23,7 +23,6 @@ export class Bullet extends Actor {
 
     hitSomething(event) {
         if (event.other instanceof Coin) {
-            // console.log("Bullet or monkey hit the coin"); (MISSCHIEN OVERBODDIG?)
             event.other.kill(); // Kill the coin
             this.kill(); // Kill the bullet
         }

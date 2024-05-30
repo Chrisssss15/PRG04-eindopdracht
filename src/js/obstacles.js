@@ -6,8 +6,6 @@ export class Obstacles extends Actor{
     
     constructor(){
         super({
-            width: 1000,
-            height: 1000,
             name: 'obstacles',
             collisionType: CollisionType.Passive
         });

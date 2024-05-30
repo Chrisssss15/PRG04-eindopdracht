@@ -28,9 +28,9 @@ export class UI extends Actor {
         engine.add(this.timerLabel);
     }
 
-    updateScore() {
-        this.coins++;
-        this.scoreLabel.text = `Score: ${this.coins}`;
+    updateScore() { 
+        this.coins++; 
+        this.scoreLabel.text = `Score: ${this.coins}`; 
     }
 
     updateTime() {

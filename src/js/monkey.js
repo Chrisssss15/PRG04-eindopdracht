@@ -6,13 +6,14 @@ import { Bullet } from "./bullet";
 import { Coin } from "./coin";
 
 export class Monkey extends Actor {
-    constructor() {
+    constructor(game) {
         super({
             width: 200,
             height: 250,
             name: 'monkey',
             collisionType: CollisionType.Active
         });
+        this.game = game;
     }
 
     onInitialize(engine) {
@@ -21,43 +22,29 @@ export class Monkey extends Actor {
         this.pos = new Vector(200, 350);
 
         this.on('collisionstart', (event) => this.hitSomething(event, engine));
-
-
     }
 
-    // // Deze functie wordt aangeroepen wanneer de aap iets raakt
-    // hitSomething(event, engine) {
-    //     if (event.other instanceof TopTree || event.other instanceof BottomTree) {
-    //         console.log("hit the tree");
-
-    //         // Sla de gamegegevens op
-    //         engine.saveGameData();
-
-    //         engine.stop(); // Stopt het spel
-    //         // alert("Game Over!"); // Optioneel: toont een bericht aan de gebruiker
-    //         // engine.restartGame(); // Herstart het spel
-
-
-    //     }
-    // }
-
+    
     hitSomething(event, engine) {
         if (event.other instanceof TopTree || event.other instanceof BottomTree) {
             console.log("hit the tree");
-    
+
             // Sla de gamegegevens op
-            engine.saveGameData();
-    
-            // // Ga naar de EndScene
+            this.game.saveGameData();
+
+            // Ga naar de endScene
             // engine.goToScene('endScene');
 
-            // Roep de endGame functie aan
-            engine.endGame();
+            // Go to endScene
+            const endScene = engine.scenes['endScene']; 
+            if (endScene && typeof endScene.endGame === 'function') {
+                endScene.endGame(engine);
+            }
+            engine.goToScene('endScene');
         }
     }
 
     shoot(engine) {
-        // Maak een nieuwe kogel en voeg deze toe aan de engine
         const bullet = new Bullet(this.pos.clone());
         engine.add(bullet);
     }
@@ -82,8 +69,7 @@ export class Monkey extends Actor {
             xspeed = 500;
         }
 
-        // Controleer of de spatiebalk is ingedrukt en of deze nog niet eerder is verwerkt
-        if (engine.input.keyboard.wasPressed(Keys.Space)) { //  
+        if (engine.input.keyboard.wasPressed(Keys.Space)) {
             this.shoot(engine);
         }
 
@@ -93,4 +79,3 @@ export class Monkey extends Actor {
         this.pos.y = clamp(this.pos.y, 0, engine.drawHeight - this.height);
     }
 }
-

@@ -1,7 +1,12 @@
-// import { Actor, Sprite, Vector, Scene } from "excalibur";
+// import { Actor, Sprite, Vector, Scene, Label, Font, Keys } from "excalibur";
 // import { Resources } from "./resources";
 
 // export class EndScene extends Scene {
+//     constructor(game) {
+//         super();
+//         this.game = game;
+//     }
+
 //     onInitialize(engine) {
 //         const sprite = new Sprite({
 //             image: Resources.EndScene,
@@ -10,17 +15,49 @@
 //             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2),
 //         });
 //         actor.graphics.use(sprite);
-//         actor.scale = new Vector(0.8, 0.8); // Vervang 0.5 door de gewenste schaalfactor
+//         actor.scale = new Vector(0.8, 0.8);
 //         this.add(actor);
+
+//         // @ts-ignore
+//         const storedGameData = JSON.parse(localStorage.getItem('Game highscore'));
+//         const highScore = storedGameData ? storedGameData.score : 0;
+
+//         const highScoreLabel = new Label({
+//             text: `High Score: ${highScore}`,
+//             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 150),
+//             font: new Font({ size: 30, family: 'Arial' })
+//         });
+//         this.add(highScoreLabel);
+//         console.log("Game over!!!!!!!"); 
 //     }
 
-    
+//     endGame(engine) {
+//         console.log("Game over!!!"); 
+
+//         if (this.spaceKeyListeners) {
+//             engine.input.keyboard.off('press', this.spaceKeyListeners);
+//         }
+
+//         this.spaceKeyListeners = (evt) => {
+//             if (evt.key === Keys.Enter) {
+//                 engine.goToScene('startScene');
+//             }
+//         };
+
+//         engine.input.keyboard.on('down', this.spaceKeyListeners);
+//     }
 // }
 
-import { Actor, Sprite, Vector, Scene, Label, Font } from "excalibur";
+
+import { Actor, Sprite, Vector, Scene, Label, Font, Keys } from "excalibur";
 import { Resources } from "./resources";
 
 export class EndScene extends Scene {
+    constructor(game) {
+        super();
+        this.game = game;
+    }
+
     onInitialize(engine) {
         const sprite = new Sprite({
             image: Resources.EndScene,
@@ -29,26 +66,34 @@ export class EndScene extends Scene {
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2),
         });
         actor.graphics.use(sprite);
-        actor.scale = new Vector(0.8, 0.8); // Vervang 0.5 door de gewenste schaalfactor
+        actor.scale = new Vector(0.8, 0.8);
         this.add(actor);
 
-        // Ontvang de huidige score en high score via de context
-        const { currentScore, highScore } = engine.currentScene.args || { currentScore: 0, highScore: 0 };
+        // @ts-ignore
+        const storedGameData = JSON.parse(localStorage.getItem('Game highscore'));
+        const highScore = storedGameData ? storedGameData.score : 0;
 
-        // Toon de huidige score
-        const currentScoreLabel = new Label({
-            text: `Score: ${currentScore}`,
-            pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 100),
-            font: new Font({ size: 30, family: 'Arial' })
-        });
-        this.add(currentScoreLabel);
-
-        // Toon de high score
         const highScoreLabel = new Label({
             text: `High Score: ${highScore}`,
             pos: new Vector(engine.drawWidth / 2, engine.drawHeight / 2 + 150),
             font: new Font({ size: 30, family: 'Arial' })
         });
         this.add(highScoreLabel);
+    }
+
+    endGame(engine) {
+        console.log("Game over!!!"); 
+
+        if (this.spaceKeyListeners) {
+            engine.input.keyboard.off('press', this.spaceKeyListeners);
+        }
+
+        this.spaceKeyListeners = (evt) => {
+            if (evt.key === Keys.Space) {
+                engine.goToScene('startScene');
+            }
+        };
+
+        engine.input.keyboard.on('down', this.spaceKeyListeners);
     }
 }

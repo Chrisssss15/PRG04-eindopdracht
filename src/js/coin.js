@@ -30,7 +30,7 @@ export class Coin extends Actor {
     }
 
     hitSomething(event, engine) {
-        if (event.other instanceof Monkey ) {
+        if (event.other instanceof Monkey ) { //
             console.log("Coin hit by Monkey");
             this.game.addPoints(); // Add points
             this.kill(); // Remove the coin after collision
