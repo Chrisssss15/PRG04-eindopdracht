@@ -19,7 +19,7 @@ export class Game extends Engine {
         this.start(ResourceLoader).then(() => this.setupScenes());
     }
 
-    setupScenes() {
+    setupScenes() { 
         this.add('startScene', new StartScene());
         this.add('gameScene', new GameScene(this));
         this.add('endScene', new EndScene(this));

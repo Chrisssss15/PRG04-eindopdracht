@@ -50,12 +50,5 @@ export class GameScene extends Scene {
         engine.add(coin);
     }
 
-    // endGame(engine) {
-    //     // console.log("Ending game and saving score...");
-    //     this.game.saveGameData();
 
-    //     // Huidige score doorgeven aan EndScene
-    //     const currentScore = this.game.ui ? this.game.ui.coins : 0;
-    //     engine.goToScene('endScene', { data: { currentScore } });
-    // }
 }
