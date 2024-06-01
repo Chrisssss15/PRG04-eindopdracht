@@ -20,7 +20,7 @@ export class StartScene extends Scene {
             this.input.keyboard.off('press', this.spaceKeyListeners);
         }
         this.spaceKeyListeners = (evt) => {
-            if (evt.key === Keys.Space && !this.gameStarted) {
+            if (evt.key === Keys.Space && !this.gameStarted) { 
                 engine.goToScene('gameScene');
                 this.gameStarted = true;
             }

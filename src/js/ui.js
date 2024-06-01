@@ -12,13 +12,13 @@ export class UI extends Actor {
     }
 
     onInitialize(engine) {
-        this.scoreLabel = new Label({
+        this.scoreLabel = new Label({ //maakt de score label aan
             text: "Score: 0",
             pos: new Vector(50, 50),
             font: new Font({ size: 30, family: 'Arial' })
         });
 
-        this.timerLabel = new Label({
+        this.timerLabel = new Label({ //maakt de timer label aan
             text: "Tijd: 0s",
             pos: new Vector(50, 100),
             font: new Font({ size: 30, family: 'Arial' })

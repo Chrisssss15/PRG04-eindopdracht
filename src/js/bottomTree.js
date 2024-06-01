@@ -9,8 +9,9 @@ export class BottomTree extends Actor {
             name: 'Boom beneden',
             collisionType: CollisionType.Fixed  // Changed from Passive to Fixed
         });
-        this.speed = 200; // Initial speed of the tree
-        this.acceleration = 20; // Speed increase per second
+        this.speed = 200; // snelheid van de boom begint bij 200
+
+        this.acceleration = 20;// snelheid wordt verhoogd met 20 per seconde
     }
 
     onInitialize(engine) {
@@ -20,14 +21,13 @@ export class BottomTree extends Actor {
     }
 
     onPostUpdate(engine, delta) {
-        // Increase the speed over time
+        // verhoog elke keer de snelheid
         this.speed += this.acceleration * delta / 1000;
         // console.log('Speed:', this.speed)
 
-        // Move the tree to the left
-        this.pos.x -= this.speed * delta / 1000;
+        this.pos.x -= this.speed * delta / 1000; //beweeeg de boom van rechts -> links
 
-        // If the tree goes off the left side of the screen, reset its position to the right
+        // als de boom van het scherm afgaat, zet de boom weer op de rechterkant
         if (this.pos.x + this.width < 0) {
             this.pos.x = engine.drawWidth;
         }

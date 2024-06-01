@@ -35,8 +35,8 @@ export class GameScene extends Scene {
 
         this.addCoin(engine);
 
-        this.game.ui = new UI();
-        engine.add(this.game.ui);
+        this.game.ui = new UI(); 
+        engine.add(this.game.ui); 
     }
 
     addPoints() {

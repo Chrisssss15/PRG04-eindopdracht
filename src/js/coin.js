@@ -11,7 +11,7 @@ export class Coin extends Actor {
             name: 'coin',
             collisionType: CollisionType.Passive
         });
-        this.game = Game; // Store a reference to the Game instance
+        this.game = Game; // Add the game object to the coin 
     }
 
     onInitialize(engine) {
@@ -36,7 +36,7 @@ export class Coin extends Actor {
             this.kill(); // Remove the coin after collision
 
             // Direct een nieuwe coin toevoegen
-            const newCoin = new Coin(this.game);
+            const newCoin = new Coin(this.game); //
             engine.add(newCoin);
         }
 

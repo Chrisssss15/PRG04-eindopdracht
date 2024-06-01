@@ -1,7 +1,7 @@
 import '../css/style.css';
 import { Engine, DisplayMode } from "excalibur";
 import { Resources, ResourceLoader } from './resources.js';
-import { GameScene } from './background.js';
+import { GameScene } from './gameScene.js';
 import { StartScene } from './startScene.js';
 import { EndScene } from './endScene.js';
 
@@ -20,9 +20,9 @@ export class Game extends Engine {
     }
 
     setupScenes() { 
-        this.add('startScene', new StartScene());
+        this.add('startScene', new StartScene()); 
         this.add('gameScene', new GameScene(this));
-        this.add('endScene', new EndScene(this));
+        this.add('endScene', new EndScene(this)); 
         this.goToScene('startScene');
     }
 

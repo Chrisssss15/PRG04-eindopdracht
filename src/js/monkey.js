@@ -34,7 +34,7 @@ export class Monkey extends Actor {
 
             // Go to endScene
             const endScene = engine.scenes['endScene']; 
-            if (endScene && typeof endScene.endGame === 'function') {
+            if (endScene && typeof endScene.endGame === 'function') { 
                 endScene.endGame(engine);
             }
             engine.goToScene('endScene');
